@@ -235,9 +235,7 @@ Each user can access and browse their previously generated creations through the
 
 ## 👨‍💻 Author
 
-**Your Name**
-
-- GitHub: [Your GitHub Profile](https://github.com/Aafreen18/imagify)
+**Aafreen Parveen**
 
 ---
 
