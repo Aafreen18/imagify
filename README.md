@@ -117,7 +117,7 @@ Make sure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+git clone [<YOUR_GITHUB_REPOSITORY_URL>](https://github.com/Aafreen18/imagify.git)
 cd Imagify
 ```
 
@@ -246,7 +246,7 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 
 **Aafreen Parveen**
 
-🔗 GitHub: (https://github.com/Aafreen18)
+🔗 GitHub: [github.com/Aafreen18](https://github.com/Aafreen18)
 
 ---
 
