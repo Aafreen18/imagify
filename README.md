@@ -117,8 +117,8 @@ Make sure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone [<YOUR_GITHUB_REPOSITORY_URL>](https://github.com/Aafreen18/imagify.git)
-cd Imagify
+git clone https://github.com/Aafreen18/imagify.git
+cd imagify
 ```
 
 ### 2. Install Dependencies
