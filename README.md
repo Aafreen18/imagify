@@ -1,11 +1,11 @@
 # Imagify – AI Image Generator 🎨
 
-Imagify is an AI-powered image generation app. It turns text prompts into images with Cloudflare Workers AI and FLUX.1 Schnell. Users can create accounts, generate images with credits, browse their image history, and purchase more credits through Razorpay.
+Imagify is an AI-powered image generation app that turns text prompts into images using Cloudflare Workers AI and FLUX.1 Schnell. Users can create accounts, generate images using credits, browse their image history, and purchase additional credits through Razorpay.
 
 🌐 **Live demo:** [Imagify](https://imagifyclient.netlify.app)  
 🚀 **Backend health:** [API health check](https://imagify-server-lqos.onrender.com/api/health)
 
-> The backend runs on Render’s free tier and may take a moment to wake up after inactivity.
+> The backend runs on Render's free tier and may take a moment to wake up after inactivity.
 
 ## Features
 
@@ -16,7 +16,7 @@ Imagify is an AI-powered image generation app. It turns text prompts into images
 - Purchase additional credits with Razorpay.
 - Switch between light and dark themes.
 
-## Tech stack
+## Tech Stack
 
 | Area | Technologies |
 |---|---|
@@ -29,7 +29,7 @@ Imagify is an AI-powered image generation app. It turns text prompts into images
 | Payments | Razorpay |
 | Hosting | Netlify (client), Render (server) |
 
-## Project structure
+## Project Structure
 
 ```text
 imagify/
@@ -53,7 +53,7 @@ imagify/
     └── package.json
 ```
 
-## Run locally
+## Run Locally
 
 ### Prerequisites
 
@@ -62,21 +62,21 @@ imagify/
 - A Cloudflare account with Workers AI access
 - Razorpay test credentials to try credit purchases
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Aafreen18/imagify.git
 cd imagify
 ```
 
-### 2. Install dependencies
+### 2. Install Dependencies
 
 ```bash
 npm install --prefix client
 npm install --prefix server
 ```
 
-### 3. Configure the server
+### 3. Configure the Server
 
 Copy `server/.env.example` to `server/.env`, then enter your own credentials:
 
@@ -94,9 +94,9 @@ USD_TO_INR_RATE=92.5
 
 Keep `server/.env` private. It is ignored by Git; **never commit real credentials or secrets**. The checked-in `.env.example` is a template and should contain placeholder values only.
 
-`USD_TO_INR_RATE` converts the plans’ USD reference prices into INR amounts for Razorpay orders. The default rate used by the server is `92.5`.
+`USD_TO_INR_RATE` converts the plans' USD reference prices into INR amounts for Razorpay orders. The default rate used by the server is `92.5`.
 
-### 4. Start the backend
+### 4. Start the Backend
 
 In one terminal:
 
@@ -105,9 +105,11 @@ cd server
 npm run dev
 ```
 
-The API runs at `http://localhost:5000`. Check its status at [http://localhost:5000/api/health](http://localhost:5000/api/health).
+The API runs at `http://localhost:5000`.
 
-### 5. Start the frontend
+Check its status at [http://localhost:5000/api/health](http://localhost:5000/api/health).
+
+### 5. Start the Frontend
 
 In a second terminal:
 
@@ -118,9 +120,9 @@ npm run dev
 
 Open [http://localhost:5173](http://localhost:5173).
 
-**API URL note:** The client currently uses the deployed Render API URL in `client/src/api.ts`. It does not currently read the API URL from a `VITE_API_URL` environment variable. To use a local backend while developing, update the client’s API base URL to `http://localhost:5000/api`; the Vite proxy is configured for `/api` requests, but the current absolute URL bypasses that proxy.
+**API URL note:** The client currently uses the deployed Render API URL in `client/src/api.ts`. It does not currently read the API URL from a `VITE_API_URL` environment variable. To use a local backend while developing, update the client's API base URL to `http://localhost:5000/api`; the Vite proxy is configured for `/api` requests, but the current absolute URL bypasses that proxy.
 
-## API endpoints
+## API Endpoints
 
 | Method | Endpoint | Purpose | Authentication |
 |---|---|---|---|
@@ -129,7 +131,7 @@ Open [http://localhost:5173](http://localhost:5173).
 | POST | `/api/auth/login` | Sign in | No |
 | GET | `/api/auth/me` | Get the signed-in user | Yes |
 | GET | `/api/credits` | Get the current credit balance | Yes |
-| GET | `/api/images` | List the user’s saved images | Yes |
+| GET | `/api/images` | List the user's saved images | Yes |
 | POST | `/api/images/generate` | Generate and save an image | Yes |
 | GET | `/api/plans` | List credit plans and INR prices | No |
 | POST | `/api/pay-razor` | Create a Razorpay order | Yes |
@@ -139,11 +141,13 @@ Authenticated endpoints expect a bearer token in the `Authorization` header.
 
 ## Payments
 
-Razorpay handles credit purchases. The server creates a payment order, verifies the payment signature and Razorpay order status, and adds credits after successful verification. Use Razorpay test keys from `server/.env` when trying the payment flow.
+Razorpay handles credit purchases. The server creates a payment order, verifies the payment signature and Razorpay order status, and adds credits after successful verification.
+
+Use Razorpay test keys from `server/.env` when trying the payment flow.
 
 ## 🖼️ Image Storage
 
-Generated images and their corresponding prompts are stored in MongoDB Atlas along with the associated user's image history. Users can browse and access their previously generated creations.
+Generated images and their corresponding prompts are stored in MongoDB Atlas, associated with the respective user's account. Users can browse their image history and access previously generated creations.
 
 ---
 
@@ -151,4 +155,4 @@ Generated images and their corresponding prompts are stored in MongoDB Atlas alo
 
 **Aafreen Parveen**
 
-- GitHub: [Aafreen18](https://github.com/Aafreen18)
+- GitHub: [@Aafreen18](https://github.com/Aafreen18)
