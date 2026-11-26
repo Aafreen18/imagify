@@ -9,7 +9,8 @@ import { User, GeneratedImage, Transaction } from './models.js'
 import authUser from './middleware/auth.js'
 
 const app = express()
-app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173' }))
+const clientOrigin = (process.env.CLIENT_ORIGIN || 'http://localhost:5173').replace(/\/+$/, '')
+app.use(cors({ origin: clientOrigin }))
 app.use(express.json({ limit: '2mb' }))
 
 const tokenFor = (user) => jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' })

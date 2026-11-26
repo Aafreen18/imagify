@@ -395,3 +395,16 @@ svg {
     width: 33.333%;
   }
 }
+
+@media (max-width: 600px) {
+  .pricing-page .plan-grid {
+    width: 100%;
+    max-width: 420px;
+    margin-inline: auto;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pricing-page .plan-grid .plan-card {
+    width: 100%;
+  }
+}
