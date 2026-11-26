@@ -141,12 +141,14 @@ Authenticated endpoints expect a bearer token in the `Authorization` header.
 
 Razorpay handles credit purchases. The server creates a payment order, verifies the payment signature and Razorpay order status, and adds credits after successful verification. Use Razorpay test keys from `server/.env` when trying the payment flow.
 
-## Image storage
+## 🖼️ Image Storage
 
-Generated images and their prompts are stored in MongoDB with the associated user’s history.
-```
+Generated images and their corresponding prompts are stored in MongoDB Atlas along with the associated user's image history. Users can browse and access their previously generated creations.
 
-## Author
+---
 
-**Aafreen Parveen**  
-GitHub: [Aafreen18](https://github.com/Aafreen18)
+## 👩‍💻 Author
+
+**Aafreen Parveen**
+
+- GitHub: [Aafreen18](https://github.com/Aafreen18)
