@@ -1,253 +1,152 @@
 # Imagify – AI Image Generator 🎨
 
-**Imagify** is an AI-powered image generation web application that transforms text prompts into images using **Cloudflare Workers AI (FLUX.1 Schnell)**. Users can create an account, generate images from their ideas, manage generation credits, and access their previously generated creations.
+Imagify is an AI-powered image generation app. It turns text prompts into images with Cloudflare Workers AI and FLUX.1 Schnell. Users can create accounts, generate images with credits, browse their image history, and purchase more credits through Razorpay.
 
-🌐 **Live Demo:** [Imagify](https://imagifyclient.netlify.app)
+🌐 **Live demo:** [Imagify](https://imagifyclient.netlify.app)  
+🚀 **Backend health:** [API health check](https://imagify-server-lqos.onrender.com/api/health)
 
-🚀 **Backend Health:** [API Health Check](https://imagify-server-lqos.onrender.com/api/health)
+> The backend runs on Render’s free tier and may take a moment to wake up after inactivity.
 
-> **Note:** The backend is hosted on Render's free tier and may take a moment to wake up on the first request.
+## Features
 
----
+- Register and sign in with JWT-based authentication.
+- Generate images from text prompts using Cloudflare Workers AI.
+- Browse and download saved images.
+- Receive 5 credits when creating an account; each successful image generation uses 1 credit.
+- Purchase additional credits with Razorpay.
+- Switch between light and dark themes.
 
-## ✨ Features
+## Tech stack
 
-- **User Authentication:** Secure user registration and login using JWT-based authentication.
-- **AI Image Generation:** Generate images from text descriptions using Cloudflare Workers AI.
-- **Image History:** Browse previously generated images associated with your account.
-- **Download Creations:** Download generated images directly to your device.
-- **Credit Management:** Manage credits used for image generation.
-- **Credit Plans:** Explore available plans to purchase additional generation credits.
-- **Payment Integration:** Razorpay integration for handling credit purchases.
-- **Theme Customization:** Switch between light and dark themes.
-
----
-
-## 🛠️ Tech Stack
-
-| Category | Technologies |
+| Area | Technologies |
 |---|---|
 | Frontend | React, TypeScript, Vite |
 | Routing | React Router |
-| Backend | Node.js, Express.js |
+| Backend | Node.js, Express |
 | Database | MongoDB Atlas, Mongoose |
-| Authentication | JSON Web Token (JWT) |
-| AI Image Generation | Cloudflare Workers AI, FLUX.1 Schnell |
-| Payment Gateway | Razorpay |
-| Frontend Hosting | Netlify |
-| Backend Hosting | Render |
+| Authentication | JWT, bcrypt |
+| Image generation | Cloudflare Workers AI, FLUX.1 Schnell |
+| Payments | Razorpay |
+| Hosting | Netlify (client), Render (server) |
 
----
-
-## 🏗️ Project Architecture
-
-Imagify follows a client-server architecture where the React frontend communicates with the Express backend through REST APIs.
+## Project structure
 
 ```text
-             USER
-               |
-               v
-       REACT FRONTEND
-        (Netlify)
-               |
-               | REST API Requests
-               v
-       NODE.JS + EXPRESS
-          (Render)
-               |
-       +-------+--------+
-       |       |        |
-       v       v        v
-    MongoDB  Cloudflare  Razorpay
-     Atlas   Workers AI  Payments
-       |       |        |
-       v       v        v
-    User &   Generated  Credit
-    Image     Images   Purchases
-    Data
-```
-
----
-
-## 📁 Project Structure
-
-```text
-Imagify/
-│
+imagify/
 ├── client/
 │   ├── public/
 │   ├── src/
-│   │   ├── assets/
 │   │   ├── components/
 │   │   ├── context/
 │   │   ├── pages/
 │   │   ├── api.ts
+│   │   ├── App.tsx
 │   │   └── main.tsx
 │   ├── package.json
 │   └── vite.config.ts
-│
-├── server/
-│   ├── config/
-│   ├── controllers/
-│   ├── middleware/
-│   ├── models/
-│   ├── routes/
-│   ├── package.json
-│   └── server.js
-│
-├── LICENSE
-└── README.md
+└── server/
+    ├── src/
+    │   ├── middleware/
+    │   ├── index.js
+    │   └── models.js
+    ├── .env.example
+    └── package.json
 ```
 
----
-
-## ⚙️ Getting Started
-
-Follow these instructions to run Imagify locally.
+## Run locally
 
 ### Prerequisites
 
-Make sure you have the following installed:
+- [Node.js](https://nodejs.org/) and npm
+- A MongoDB Atlas connection string
+- A Cloudflare account with Workers AI access
+- Razorpay test credentials to try credit purchases
 
-- [Node.js](https://nodejs.org/)
-- npm
-- MongoDB Atlas account
-- Cloudflare account with Workers AI access
-
-### 1. Clone the Repository
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/Aafreen18/imagify.git
 cd imagify
 ```
 
-### 2. Install Dependencies
-
-Install frontend dependencies:
+### 2. Install dependencies
 
 ```bash
 npm install --prefix client
-```
-
-Install backend dependencies:
-
-```bash
 npm install --prefix server
 ```
 
-### 3. Configure Environment Variables
+### 3. Configure the server
 
-Create a `.env` file inside the `server` directory.
+Copy `server/.env.example` to `server/.env`, then enter your own credentials:
 
 ```env
 PORT=5000
-
 MONGODB_URI=your-mongodb-atlas-connection-string
-
 JWT_SECRET=your-long-random-secret
-
 CLOUDFLARE_ACCOUNT_ID=your-cloudflare-account-id
-CLOUDFLARE_API_TOKEN=your-cloudflare-api-token
-
+CLOUDFLARE_API_TOKEN=your-cloudflare-workers-ai-token
 CLIENT_ORIGIN=http://localhost:5173
-
-RAZORPAY_KEY_ID=your-razorpay-key-id
-RAZORPAY_KEY_SECRET=your-razorpay-key-secret
-
+RAZORPAY_KEY_ID=rzp_test_your_key_id
+RAZORPAY_KEY_SECRET=your-razorpay-test-key-secret
 USD_TO_INR_RATE=92.5
 ```
 
-### 4. Run the Backend
+Keep `server/.env` private. It is ignored by Git; **never commit real credentials or secrets**. The checked-in `.env.example` is a template and should contain placeholder values only.
 
-Open a terminal and execute:
+`USD_TO_INR_RATE` converts the plans’ USD reference prices into INR amounts for Razorpay orders. The default rate used by the server is `92.5`.
+
+### 4. Start the backend
+
+In one terminal:
 
 ```bash
 cd server
 npm run dev
 ```
 
-The backend will run at:
+The API runs at `http://localhost:5000`. Check its status at [http://localhost:5000/api/health](http://localhost:5000/api/health).
 
-`http://localhost:5000`
+### 5. Start the frontend
 
-Backend health check:
-
-`http://localhost:5000/api/health`
-
-### 5. Run the Frontend
-
-Open another terminal and execute:
+In a second terminal:
 
 ```bash
 cd client
 npm run dev
 ```
 
-The frontend will usually be available at:
+Open [http://localhost:5173](http://localhost:5173).
 
-`http://localhost:5173`
+**API URL note:** The client currently uses the deployed Render API URL in `client/src/api.ts`. It does not currently read the API URL from a `VITE_API_URL` environment variable. To use a local backend while developing, update the client’s API base URL to `http://localhost:5000/api`; the Vite proxy is configured for `/api` requests, but the current absolute URL bypasses that proxy.
 
----
+## API endpoints
 
-## 💳 Payment Integration
+| Method | Endpoint | Purpose | Authentication |
+|---|---|---|---|
+| GET | `/api/health` | Check API and database connection status | No |
+| POST | `/api/auth/register` | Create an account | No |
+| POST | `/api/auth/login` | Sign in | No |
+| GET | `/api/auth/me` | Get the signed-in user | Yes |
+| GET | `/api/credits` | Get the current credit balance | Yes |
+| GET | `/api/images` | List the user’s saved images | Yes |
+| POST | `/api/images/generate` | Generate and save an image | Yes |
+| GET | `/api/plans` | List credit plans and INR prices | No |
+| POST | `/api/pay-razor` | Create a Razorpay order | Yes |
+| POST | `/api/verify-razor` | Verify a payment and add credits | Yes |
 
-Imagify uses **Razorpay** to handle credit purchases.
+Authenticated endpoints expect a bearer token in the `Authorization` header.
 
-The payment workflow involves:
+## Payments
 
-1. The user selects a credit plan.
-2. The frontend requests a payment order from the backend.
-3. The backend creates a Razorpay order.
-4. The Razorpay checkout interface opens for the user.
-5. The user completes the payment.
-6. The backend verifies the payment details.
-7. The user's available credits are updated after successful verification.
+Razorpay handles credit purchases. The server creates a payment order, verifies the payment signature and Razorpay order status, and adds credits after successful verification. Use Razorpay test keys from `server/.env` when trying the payment flow.
 
-Razorpay test credentials can be configured to test the payment workflow without processing real payments.
+## Image storage
 
----
+Generated images and their prompts are stored in MongoDB with the associated user’s history.
+```
 
-## 🖼️ Image Storage
+## Author
 
-Generated images are currently stored in **MongoDB Atlas** along with the corresponding user's image history.
-
-Each user can access and browse their previously generated creations through the application.
-
----
-
-## 🔒 Security Considerations
-
-- JWT-based authentication for protected API access.
-- Backend-side handling of sensitive API credentials.
-- Environment variables for database and third-party service configuration.
-- Payment verification handled by the backend.
-- User-specific image history and credit management.
-
----
-
-## 🚀 Future Improvements
-
-- Cloud-based image storage using Cloudinary or Amazon S3.
-- More AI image generation models.
-- Advanced image customization options.
-- Improved image generation history and search.
-- Additional payment and subscription plans.
-- Image sharing functionality.
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
-
----
-
-## 👨‍💻 Author
-
-**Aafreen Parveen**
-
-🔗 GitHub: [github.com/Aafreen18](https://github.com/Aafreen18)
-
----
-
-⭐ If you find this project interesting, consider giving the repository a star!
+**Aafreen Parveen**  
+GitHub: [Aafreen18](https://github.com/Aafreen18)
