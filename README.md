@@ -6,6 +6,8 @@
 
 🚀 **Backend Health:** [API Health Check](https://imagify-server-lqos.onrender.com/api/health)
 
+> **Note:** The backend is hosted on Render's free tier and may take a moment to wake up on the first request.
+
 ---
 
 ## ✨ Features
@@ -93,6 +95,7 @@ Imagify/
 │   ├── package.json
 │   └── server.js
 │
+├── LICENSE
 └── README.md
 ```
 
@@ -233,9 +236,17 @@ Each user can access and browse their previously generated creations through the
 
 ---
 
+## 📄 License
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+
+---
+
 ## 👨‍💻 Author
 
 **Aafreen Parveen**
+
+🔗 GitHub: (https://github.com/Aafreen18)
 
 ---
 
